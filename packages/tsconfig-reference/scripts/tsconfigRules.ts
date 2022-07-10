@@ -6,12 +6,12 @@ import ts from "typescript";
 export interface CommandLineOption {
   name: string;
   type:
-    | "string"
-    | "number"
-    | "boolean"
-    | "object"
-    | "list"
-    | Map<string, number | string>;
+  | "string"
+  | "number"
+  | "boolean"
+  | "object"
+  | "list"
+  | Map<string, number | string>;
   defaultValueDescription?: string | number | boolean | ts.DiagnosticMessage;
   category?: ts.DiagnosticMessage;
   element: CommandLineOption;
@@ -200,14 +200,14 @@ export const defaultsForOptions = {
       typeof option.defaultValueDescription === "object"
         ? option.defaultValueDescription.message
         : formatDefaultValue(
-            option.defaultValueDescription,
-            option.type === "list" ? option.element.type : option.type
-          ),
+          option.defaultValueDescription,
+          option.type === "list" ? option.element.type : option.type
+        ),
     ])
   ),
   allowJs: "`false`",
   allowSyntheticDefaultImports: [
-    "`true` if [`module`](#module) is `system`, or [`esModuleInterop`](#esModuleInterop) and [`module`](#module) is not `es6`/`es2015` or `esnext`,",
+    "`true` if [`module`](#module) is `system`, or [`esModuleInterop`](#esModuleInterop) and [`module`](#module) is not `es6`/`es2015` or `esnext`",
     "`false` otherwise.",
   ],
   allowUmdGlobalAccess: "`false`",
@@ -243,7 +243,7 @@ export const defaultsForOptions = {
   forceConsistentCasingInFileNames: "`false`",
   importHelpers: "`false`",
   importsNotUsedAsValues: "`remove`",
-  include: ["`[]` if [`files`](#files) is specified,", "`**` otherwise."],
+  include: ["`[]` if [`files`](#files) is specified", "`**` otherwise."],
   incremental: trueIf("composite"),
   inlineSourceMap: "`false`",
   inlineSources: "`false`",
@@ -255,15 +255,14 @@ export const defaultsForOptions = {
   listEmittedFiles: "`false`",
   listFiles: "`false`",
   locale: "Platform specific.",
-  mapRoot: '`""`',
-  maxNodeModuleJsDepth : "`0`",
+  maxNodeModuleJsDepth: "`0`",
   module: [
     "`CommonJS` if [`target`](#target) is `ES3` or `ES5`,",
     "`ES6`/`ES2015` otherwise.",
   ],
   moduleResolution: [
-    "`Classic` if [`module`](#module) is `AMD`, `UMD`, `System` or `ES6`/`ES2015`,",
-    "Matches if [`module`](#module) is `node12` or `nodenext`,",
+    "`Classic` if [`module`](#module) is `AMD`, `UMD`, `System` or `ES6`/`ES2015`",
+    "Matches if [`module`](#module) is `node12` or `nodenext`",
     "`Node` otherwise.",
   ],
   moduleSuffixes: "`[]`",
@@ -295,8 +294,11 @@ export const defaultsForOptions = {
   reactNamespace: "React",
   removeComments: "`false`",
   resolveJsonModule: "`false`",
-  rootDir: "Computed from the list of input files.",
-  rootDirs: "Computed from the list of input files.",
+  rootDir: [
+    "If [`composite`](#composite) is `true` the directory that contains `tsconfig.json`",
+    "otherwise the longest common path of all non-declaration input files.",
+  ],
+  rootDirs: "`[]`",
   skipDefaultLibCheck: "`false`",
   skipLibCheck: "`false`",
   sourceMap: "`false`",
@@ -314,7 +316,7 @@ export const defaultsForOptions = {
   typeRoots: "All visible `@types` packages are included in compilation.",
   types: "All visible `@types` packages are included in compilation.",
   useDefineForClassFields: [
-    "`true` if [`target`](#target) is `ES2022` or higher, including `ESNext`,",
+    "`true` if [`target`](#target) is `ES2022` or higher, including `ESNext`",
     "`false` otherwise.",
   ],
   useUnknownInCatchVariables: trueIf("strict"),
@@ -437,8 +439,8 @@ Object.keys(releaseToConfigsMap).forEach((v) => {
 export const parseMarkdown = (value: string | string[]) =>
   Array.isArray(value)
     ? `<ul>${value
-        .map((element) => `<li>${parseMarkdown(element)}</li>`)
-        .join("")}</ul>`
+      .map((element) => `<li>${parseMarkdown(element)}</li>`)
+      .join("")}</ul>`
     : remark()
-        .use(remarkHTML)
-        .processSync(value !== undefined ? String(value).replace(/^[-.0-9_a-z]+$/i, "`$&`") : undefined);
+      .use(remarkHTML)
+      .processSync(value !== undefined ? String(value).replace(/^[-.0-9_a-z]+$/i, "`$&`") : undefined);
